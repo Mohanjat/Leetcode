@@ -12,32 +12,52 @@
 class Solution {
 public:
     
-    int height(TreeNode* root){
+//     int height(TreeNode* root){
+//         if(root == NULL) return 0;
+        
+//         int left = height(root->left);
+//         int right = height(root->right);
+        
+//         return max(left,right)+1;
+//     }
+    
+//     int diameter(TreeNode* root){
+//         //base case
+//         if(root == NULL) return 0;
+        
+//         //yaa to answer left subtree se aayega
+//         int a = diameter(root->left);
+//         //yaa phir right subtree se aayega
+//         int b = diameter(root->right);
+//         //yaa phir root se hote huye aayega
+//         int c = height(root->left) + height(root->right) + 1;
+        
+//         return max(a,max(b,c));
+//     }
+
+    int height(TreeNode* root,int &diameter){
+        
         if(root == NULL) return 0;
         
-        int left = height(root->left);
-        int right = height(root->right);
+        int left = height(root->left,diameter);
+        int right = height(root->right,diameter);
+        
+        int currD = left + right;
+        
+        diameter = max(diameter,currD);
         
         return max(left,right)+1;
     }
     
-    int diameter(TreeNode* root){
-        //base case
-        if(root == NULL) return 0;
-        
-        //yaa to answer left subtree se aayega
-        int a = diameter(root->left);
-        //yaa phir right subtree se aayega
-        int b = diameter(root->right);
-        //yaa phir root se hote huye aayega
-        int c = height(root->left) + height(root->right) + 1;
-        
-        return max(a,max(b,c));
-    }
-    
     int diameterOfBinaryTree(TreeNode* root) {
         
-        return diameter(root) -1;
+        // return diameter(root) -1;
+        
+        int diameter = 0;
+        
+        height(root,diameter);
+        
+        return diameter;
          
     }
 };
