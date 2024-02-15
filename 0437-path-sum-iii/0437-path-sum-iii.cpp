@@ -15,7 +15,11 @@ public:
     void findSum(TreeNode* root,long &targetSum,long &temp,long& sum){
         
         if(root == NULL) return ;
+        
+        //phle isliye add ki h value kyo leaf node ke case ke ander 
+        //equal condition check kiye bina hi return ho jaa rhy thy
         sum += root->val;
+        
         if(targetSum == sum) temp++;
         
       
