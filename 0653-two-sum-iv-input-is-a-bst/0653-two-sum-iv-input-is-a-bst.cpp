@@ -66,7 +66,7 @@ public:
         inOrderTraversal(root->left,v);
         v.push_back(root->val);
         inOrderTraversal(root->right,v);
-    }
+        }
     
     bool findTarget(TreeNode* root, int k) {
         
@@ -78,19 +78,38 @@ public:
         
         inOrderTraversal(root,inorder);
         
-        unordered_map<int,int> map;
+        int s = 0;
+        int e = inorder.size()-1;
         
-        for(int i=0; i<inorder.size(); i++){
-            
-            //check if the value is present in map or not
-            if(map.find(k-inorder[i]) == map.end()){
-                //means value nhi mili h to entry create kr do
-                map[inorder[i]] = i;
-            }else{
-                //means we found 2 values that is equal == target
+        while(s<e){
+            if(inorder[s]+inorder[e] == k){
                 return true;
             }
+            
+            if(inorder[s]+inorder[e] > k){
+                e--;
+            }
+            else{
+                s++;
+            }
         }
+        
         return false;
+        
+        
+        // unordered_map<int,int> map;
+        
+//         for(int i=0; i<inorder.size(); i++){
+            
+//             //check if the value is present in map or not
+//             if(map.find(k-inorder[i]) == map.end()){
+//                 //means value nhi mili h to entry create kr do
+//                 map[inorder[i]] = i;
+//             }else{
+//                 //means we found 2 values that is equal == target
+//                 return true;
+//             }
+//         }
+//         return false;
     }
 };
