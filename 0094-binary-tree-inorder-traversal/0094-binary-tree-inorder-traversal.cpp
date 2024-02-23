@@ -30,8 +30,43 @@ public:
         
         //LNR
         
+        //Morris Traversal
+        
         vector<int> ans;
-        inOrder(root,ans);
+        
+        TreeNode* curr = root;
+        
+        while(curr){
+            //left node is NULL, then visit it and go right
+            if(curr->left == NULL){
+                ans.push_back(curr->val);
+                curr = curr->right;
+            }
+            else{
+                //left node is not NULL
+                
+                //1- predecessor nikal lo
+                TreeNode* pred = curr->left;
+                while(pred->right != curr && pred->right){
+                    pred = pred->right;
+                }
+                
+                //yha se niklne ke baad we having two condition
+                //if pred right node is NULL go left after establishing link from pred to curr
+                if(pred->right == NULL){
+                    pred->right = curr;
+                    curr = curr->left;
+                }
+                else{
+                    //left is already visited,break the link of pred and
+                    //go right after visiting curr node
+                    pred->right = NULL;
+                    ans.push_back(curr->val);
+                    curr = curr->right;
+                }
+            }
+        }
+
         return ans;
     }
 };
