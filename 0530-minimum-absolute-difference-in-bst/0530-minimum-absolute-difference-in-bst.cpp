@@ -29,26 +29,9 @@ public:
         
         int mini = INT_MAX;
         
-//         int i=0;
-//         int j = inorder.size()-1;
-        
-//         while(i<j){
-//             int diff = abs(inorder[i]-inorder[j]);
-//             mini = min(mini,diff);
-//             if(diff < mini){
-//                 j--;
-//             }
-//             else{
-//                 i++;
-//             }
-//             mini = min(mini,diff);
-//         }
-        
-        for(int i=0; i<inorder.size(); i++){
-            for(int j=i+1; j<inorder.size(); j++){
-                int diff = abs(inorder[i]-inorder[j]);
-                mini = min(mini,diff);
-            }
+        for(int i=0; i<inorder.size()-1; i++){
+            int diff = (inorder[i+1]-inorder[i]);
+            mini = min(mini,diff);
         }
         return mini;
     }
