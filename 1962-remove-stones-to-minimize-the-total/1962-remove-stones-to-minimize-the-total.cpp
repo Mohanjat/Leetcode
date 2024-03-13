@@ -10,16 +10,9 @@ public:
         
         while(k!=0){
             int top = pq.top();
-            int temp = top;
-            if(top&1){
-                temp = (top/2)+1;
-            }
-            else{
-                temp = top/2;
-            }
-            
             pq.pop();
-            pq.push(temp);
+            top = top-floor(top/2);    
+            pq.push(top);
             k--;
         }
         
