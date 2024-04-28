@@ -2,20 +2,27 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         
-        next_permutation(nums.begin(), nums.end()); 
+        //step1-- find the pivot element
+        int i = nums.size()-2;
         
-        // bool check = true;
+        while(i>=0 && nums[i] >= nums[i+1]){
+            i--;
+        }
         
-//         for(int i=nums.size()-1; i>0; i--){
-//             if(nums[i] > nums[i-1]){
-//                 swap(nums[i],nums[i-1]);
-//                 check = false;
-//                 break;
-//             }
-//         }
+        //step2-- now find the just greater element to the pivot element
+        if(i>=0){
+             int j = nums.size()-1;
+             while(j>=0 && nums[j] <= nums[i]){
+                 j--;
+             }
+            //step3-- swap the elements
+            swap(nums[i],nums[j]);
+        }
         
-//         if(check){
-//             reverse(nums.begin(),nums.end());
-//         }
+        //step3-- pivot ke piche ke element ke elements ko reverse kr do
+        reverse(nums.begin()+i+1,nums.end());
+       
+      
+        // next_permutation(nums.begin(), nums.end()); 
     }
 };
