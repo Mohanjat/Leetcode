@@ -13,12 +13,17 @@ public:
         while(node->next->next != NULL){
             //take the val of the next node
             //replace current val with newVal
-            node->val = node->next->val;
+           node->val = node->next->val;
+            
             node = node->next;
+            
         }
-   
+        
         node->val = node->next->val;
-        node->next = NULL;     
+        
+        ListNode* lastNode = node->next;
+        node->next = NULL;
+        delete lastNode;        
         
     }
 };
