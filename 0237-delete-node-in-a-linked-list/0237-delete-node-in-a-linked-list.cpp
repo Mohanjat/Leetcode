@@ -12,21 +12,13 @@ public:
         
         while(node->next->next != NULL){
             //take the val of the next node
-            int newVal = node->next->val;
             //replace current val with newVal
-            node->val = newVal;
-            
+            node->val = node->next->val;
             node = node->next;
-            
         }
-        
-        int newVal = node->next->val;
-        
-        node->val = newVal;
-        
-        ListNode* lastNode = node->next;
-        node->next = NULL;
-        delete lastNode;        
+   
+        node->val = node->next->val;
+        node->next = NULL;     
         
     }
 };
