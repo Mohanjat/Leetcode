@@ -6,6 +6,7 @@ public:
         long long val = 0;
         
         for(int i=0; i<piles.size(); i++){
+            if(val>h) return false;
             val += ceil(piles[i] / double(mid));    
         }
         
