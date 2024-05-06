@@ -23,29 +23,52 @@ public:
     
     ListNode* removeNodes(ListNode* head){
         
+        //Approach#3 using Recursion;
+        
+        //base case
+        if(head == NULL || head->next == NULL) return head;
+        
+        //hum head prr h aur head se bola h ki head se aage waala answer le aao
+        ListNode* nextNode = removeNodes(head->next);
+        
+        //check kr lo nextNode ki val head ki val se bdi to nhi h 
+        if(nextNode->val > head->val){
+            //head ko delete kr do
+            delete head;
+            return nextNode;
+        }
+        
+        head->next = nextNode;
+        return head;
+        
+        
         //Approac#2 using Stack
-        stack<ListNode*> st;
-        ListNode* curr = head;
+//         stack<ListNode*> st;
+//         ListNode* curr = head;
         
-        while(curr){
-            while(!st.empty() && st.top()->val < curr->val){
-                st.pop();
-            }
-            st.push(curr);
-            curr = curr->next;
-        }
+//         while(curr){
+//             while(!st.empty() && st.top()->val < curr->val){
+//                 st.pop();
+//             }
+//             st.push(curr);
+//             curr = curr->next;
+//         }
         
-        ListNode* newHead = st.top();
-        st.pop();
+//         ListNode* newHead = st.top();
+//         st.pop();
         
-        while(!st.empty()){
-            ListNode* tempNode = st.top();
-            st.pop();
-            tempNode->next = newHead;
-            newHead = tempNode;
-        }
+//         while(!st.empty()){
+//             ListNode* tempNode = st.top();
+//             st.pop();
+//             tempNode->next = newHead;
+//             newHead = tempNode;
+//         }
         
-        return newHead;
+//         return newHead;
+        
+        
+        
+        //Approach#1 using Reversal
       
 //        ListNode* prev1 = NULL;
 //        head = reverse(head,prev1);
