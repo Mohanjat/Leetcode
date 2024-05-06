@@ -23,47 +23,41 @@ public:
     
     ListNode* removeNodes(ListNode* head){
       
-       ListNode* prev = NULL;
-       head = reverse(head,prev);
+       ListNode* prev1 = NULL;
+       head = reverse(head,prev1);
         
        ListNode* temp = head;
         
         int maxi = INT_MIN;
+        ListNode* prev = temp;
         
-        ListNode* newHead = NULL;
-        ListNode* newTemp = newHead;
+        maxi  = temp->val;
+        temp = temp->next;
         
         while(temp){
             if(temp->val < maxi){
                 //delete the node
-                temp  = temp->next;
+                if(!temp->next){
+                    prev->next = nullptr;
+                }
+                
+                ListNode* newTemp = temp->next;
+                temp->next = nullptr;
+                prev->next = newTemp;
+                temp = newTemp;
             }
             else{
                 //update the maxi and aage bd jaao
-                ListNode* tempNode = new ListNode(temp->val);
-                if(!newHead){
-                    newHead = tempNode;
-                    newTemp = newHead;
-                }
-                else{
-                    newTemp->next = tempNode;
-                    newTemp = tempNode;
-                }
-                
                 maxi = temp->val;
                 temp = temp->next;
+                prev = prev->next;
             }
         }
         
         prev = nullptr;
-        newHead = reverse(newHead,prev);
+        head = reverse(head,prev);
         
-       // while(newHead){
-       //     cout<<newHead->val<<" ";
-       //     newHead = newHead->next;
-       // }cout<<endl;
-        
-        return newHead;
+        return head;
         
     }
 };
