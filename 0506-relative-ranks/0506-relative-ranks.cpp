@@ -1,41 +1,83 @@
 class Solution {
 public:
     vector<string> findRelativeRanks(vector<int>& score) {
-        priority_queue<int> maxHeap;
         
-        for(auto i:score){
-            maxHeap.push(i);
-        }
+        //Approach#2 Instead of map and heap using array of size maxElement+1
         
-        unordered_map<int,int> mp;
+        int maxi = INT_MIN;
+        
+        for(int i=0; i<score.size(); i++) maxi = max(maxi,score[i]);
+        
+        vector<int> temp(maxi+1,-1);
         
         for(int i=0; i<score.size(); i++){
-            mp[score[i]] = i;
+            temp[score[i]] = i;
         }
         
         vector<string> ans(score.size(),"");
         
         int cnt = 1;
         
-        while(!maxHeap.empty()){
+        for(int i=maxi; i>=0; i--){
             
-            int index = mp[maxHeap.top()];
-            
+            if(temp[i] == -1) continue;
+             
             if(cnt == 1){
-                ans[index] = "Gold Medal";
+                ans[temp[i]] = "Gold Medal";
             }
             else if(cnt == 2){
-                ans[index] = "Silver Medal";
+                ans[temp[i]] = "Silver Medal";
             }
             else if(cnt == 3){
-                ans[index] = "Bronze Medal";
+                ans[temp[i]] = "Bronze Medal";
             }
             else{
-                ans[index] = to_string(cnt);
+                ans[temp[i]] = to_string(cnt);
             }
             cnt++;
-            maxHeap.pop();
         }
+        
         return ans;
+        
+        //Approach#1 using Max Heap
+        
+        
+//         priority_queue<int> maxHeap;
+        
+//         for(auto i:score){
+//             maxHeap.push(i);
+//         }
+        
+//         unordered_map<int,int> mp;
+        
+//         for(int i=0; i<score.size(); i++){
+//             mp[score[i]] = i;
+//         }
+        
+//         vector<string> ans(score.size(),"");
+        
+//         int cnt = 1;
+        
+//         while(!maxHeap.empty()){
+            
+//             int index = mp[maxHeap.top()];
+            
+//             if(cnt == 1){
+//                 ans[index] = "Gold Medal";
+//             }
+//             else if(cnt == 2){
+//                 ans[index] = "Silver Medal";
+//             }
+//             else if(cnt == 3){
+//                 ans[index] = "Bronze Medal";
+//             }
+//             else{
+//                 ans[index] = to_string(cnt);
+//             }
+//             cnt++;
+//             maxHeap.pop();
+//         }
+//         return ans;
+        
     }
 };
