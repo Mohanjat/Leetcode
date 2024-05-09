@@ -6,18 +6,14 @@ public:
         
         for(auto i:happiness) maxHeap.push(i);
         
-        vector<long long>temp;
+        long long sum = 0;
+        int cnt = 0;
         
         while(k--){
-            temp.push_back(maxHeap.top());
+            if(maxHeap.top()-cnt < 0) continue;
+            sum += maxHeap.top()-cnt;
+            cnt++;
             maxHeap.pop();
-        }
-        
-        long long sum = 0;
-        
-        for(int i=0; i<temp.size(); i++){
-            if(temp[i]-i < 0) continue;
-            sum += temp[i]-i;
         }
         
         return sum;
