@@ -12,49 +12,48 @@
 class Solution {
 public:
     
-    TreeNode* solve(TreeNode* root,int target){
+//     TreeNode* solve(TreeNode* root,int target){
         
-        if(root == NULL) return NULL;
+//         if(root == NULL) return NULL;
         
-        if(root->left == NULL && root->right == NULL){
-            if(root->val == target){
-                // cout<<"target value is "<<root->val<<endl;
-                return NULL;
-            }
-            //means it's a leaf node and equal to target need to delete this node
-            return root;
-        }
+//         if(root->left == NULL && root->right == NULL){
+//             if(root->val == target){
+//                 // cout<<"target value is "<<root->val<<endl;
+//                 return NULL;
+//             }
+//             //means it's a leaf node and equal to target need to delete this node
+//             return root;
+//         }
         
     
-        //left se answer nikaalo
-        TreeNode* l = removeLeafNodes(root->left,target);
-        //and right se answer nikaalo
-        TreeNode* r = removeLeafNodes(root->right,target);
+//         //left se answer nikaalo
+//         TreeNode* l = removeLeafNodes(root->left,target);
+//         //and right se answer nikaalo
+//         TreeNode* r = removeLeafNodes(root->right,target);
         
-        if(l == NULL && root->left != NULL) root->left = NULL;
-        if(r == NULL && root->right != NULL) root->right = NULL;
+//         if(l == NULL && root->left != NULL) root->left = NULL;
+//         if(r == NULL && root->right != NULL) root->right = NULL;
         
-        if(root->left == NULL && root->right == NULL && root->val == target){
-            // cout<<"target value is "<<root->val<<endl;
-            return NULL;
-        }
-        else{
-            return root;
-        }
+//         if(root->left == NULL && root->right == NULL && root->val == target){
+//             // cout<<"target value is "<<root->val<<endl;
+//             return NULL;
+//         }
+//         else{
+//             return root;
+//         }
         
-    }
-    
-    void print(TreeNode* root){
-        if(!root) return;
-        cout<<"root val "<<root->val<<endl;
-        print(root->left);
-        print(root->right);
-    }
+//     }
     
     TreeNode* removeLeafNodes(TreeNode* root, int target) {
-        TreeNode* ans = solve(root,target);
+        // TreeNode* ans = solve(root,target);
+    
+        if(root == NULL) return NULL;
         
-        // print(ans);
-        return ans;
+        root->left = removeLeafNodes(root->left,target);
+        root->right = removeLeafNodes(root->right,target);
+        
+        if(root->val == target && root->left == NULL && root->right == NULL) return NULL;
+        
+        return root;
     }
 };
