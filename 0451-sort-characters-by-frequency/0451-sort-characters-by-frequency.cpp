@@ -7,14 +7,7 @@ public:
             mp[i]++;
         }
         
-          
-        // Define a custom comparator for the priority queue
-        auto cmp = [](pair<int, char> left, pair<int, char> right) {
-            return left.first < right.first;  // Max-heap based on frequency
-        };
-        
-        // Create a max-heap (priority_queue) with the custom comparator
-        priority_queue<pair<int, char>, vector<pair<int, char>>, decltype(cmp)> maxHeap(cmp);
+        priority_queue<pair<int,char>> maxHeap;
         
         for(auto it:mp){
             maxHeap.push({it.second,it.first});
