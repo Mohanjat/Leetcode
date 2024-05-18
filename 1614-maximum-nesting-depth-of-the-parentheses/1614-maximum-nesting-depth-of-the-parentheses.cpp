@@ -2,33 +2,19 @@ class Solution {
 public:
     int maxDepth(string s) {
         
-        stack<pair<char,int>> st;
+        int maxi = INT_MIN;
+        stack<char>st;
         
-        int i=0;
-        int cnt = 0;
-        int depth = INT_MIN;
-        
-        while(i<s.length()){
-            char ch = s[i];
-            if(st.empty() && ch == ')') continue;
-            
-            if(ch == '('){
-                cnt++;
-                st.push({'(',cnt});
+        for(int i=0; i<s.length(); i++){
+            if(s[i] == '('){
+                st.push(s[i]);
+                int size = st.size();
+                maxi = max(maxi,size);
             }
-            else if(ch == ')'){
-                // while(st.top() != '('){
-                //     st.pop();
-                // }
-                pair<char,int> temp = st.top();
-                st.pop();
-                depth = max(depth,temp.second);
-                cnt--;
+            else if(s[i] == ')' && !st.empty()) {
+                    st.pop();
             }
-            i++;
         }
-        
-        return depth == INT_MIN ? 0:depth;
-        
+        return maxi == INT_MIN ? 0 : maxi;
     }
 };
