@@ -28,6 +28,7 @@ public:
         
           // Convert substring to integer
         long long ans = 0;
+        
         try {
             ans = stoll(s.substr(i, j - i));
         } catch (out_of_range & e) {
@@ -44,6 +45,6 @@ public:
         if (ans < INT_MIN) return INT_MIN;
         if (ans > INT_MAX) return INT_MAX;
         
-        return (int)ans;
+        return ans;
     }
 };
