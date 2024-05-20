@@ -26,11 +26,13 @@ public:
                 //shrink the window size
                 hashMap[s[l]-'A']--;
                 
-                maxFreq = 0;
+                // maxFreq = 0;
                 //now update the maxFreq
-                for(int i=0; i<26; i++){
-                    maxFreq = max(maxFreq,hashMap[i]);
-                }
+                //now need to update maxFreq, because we need better answer
+                //which is only possible when maxFreq is increaces, it's not                      possible with curr maxfreq 
+                // for(int i=0; i<26; i++){
+                //     maxFreq = max(maxFreq,hashMap[i]);
+                // }
                 
                 l++;
             }
