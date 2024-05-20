@@ -30,7 +30,7 @@ public:
         long long ans = 0;
         try {
             ans = stoll(s.substr(i, j - i));
-        } catch (out_of_range &e) {
+        } catch (out_of_range & e) {
             // Handle potential overflows
             return checkMinus ? INT_MIN : INT_MAX;
         }
