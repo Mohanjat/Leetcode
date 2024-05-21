@@ -1,23 +1,37 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-
-        int hash1[256] = {0};//For storing mapping of t in s
-        int hash2[256] = {0}; //For update visited of t string elements
-
-        for(int i=0; i<s.length(); i++){
-            if(hash1[s[i]] == 0 && hash2[t[i]] == 0){
-                hash1[s[i]] = t[i];
-                hash2[t[i]] = 1;
+       
+       if(s.length() != t.length()) return false;
+        
+       unordered_map<char,char>mp;
+        
+       int hashMap[256] = {0};
+        
+       int i=0;
+        
+        while(i<s.length()){
+            
+            if(mp.find(s[i]) != mp.end()){
+                //means the char is found
+                //now check, is curr char is matched correctly of not
+                char mappedChar = mp[s[i]];
+                if(mappedChar != t[i]) return false;
+                
             }
-        }
-
-        //chech kya hum mapped string se t string bna skte h ya nhi 
-        for(int i=0; i<s.length(); i++){
-            if(char(hash1[s[i]]) != t[i]){
-                 return false;
+            else{
+                //t[i] ko tbhi map krenge jb wo phle se map na ho
+                if(hashMap[t[i]] == 1) return false;
+                //normal flow
+                mp[s[i]] = t[i];
+                //and mark the curr char visited
+                hashMap[t[i]] = 1;
             }
+            
+            i++;
         }
-        return true;     
-    }
+        
+       return true;
+        
+    } 
 };
