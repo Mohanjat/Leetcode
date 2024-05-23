@@ -1,39 +1,34 @@
 class Solution {
 public:
     
-    void solve(vector<int> &nums,int k,int i,int &ans,vector<int> &temp){
+    void solve(vector<int> &nums,int k,int i,int &ans,unordered_map<int,int> &mp){
         //base case
         if(i>=nums.size()){
             // for(int l=0; l<temp.size(); l++){
             //     cout<<temp[l]<<" ";
-            // }cout<<endl;
-            if(temp.size() == 0) return;
+            // }cout<<endl
+            if(mp.size() == 0) return;
             ans++;
             return;
         }
         
         //include
         //before include check that it is possible or not
-        int currSize = temp.size();
-        int j = currSize-1;
         bool check = true;
-        while(j>=0){
-            if(abs(nums[i]-temp[j]) == k){
-                //means no need to include the curr value and check further
-                check = false;
-                break;
-            }
-            j--;
-        }
+        if((mp.find(nums[i]+k) != mp.end()) || (mp.find(nums[i]-k) != mp.end())){
+            //means the curr element is not possible
+            check = false;
+        } 
         
         if(check){
-            temp.push_back(nums[i]);
-            solve(nums,k,i+1,ans,temp);
-            temp.pop_back();
+            mp[nums[i]]++;
+            solve(nums,k,i+1,ans,mp);
+            mp[nums[i]]--;
+            if(mp[nums[i]] == 0) mp.erase(nums[i]);
         }
         
         //exclude
-        solve(nums,k,i+1,ans,temp);
+        solve(nums,k,i+1,ans,mp);
         
     }
     
@@ -41,8 +36,8 @@ public:
         
         //using include and exclude
         int ans = 0;
-        vector<int>temp;
-        solve(nums,k,0,ans,temp);
+        unordered_map<int,int>mp;
+        solve(nums,k,0,ans,mp);
         return ans;
     }
 };
