@@ -1,6 +1,11 @@
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
+        
+        //intutuion is simple 
+        //agr 34%4 == 2 than agr isme hum 4 ka koi bhi multiple add krenge to 
+        //bhi remain 2 hi aayega like -- 38%4 == 2 and so on
+    
     
         unordered_map<int,int> mp;
         
