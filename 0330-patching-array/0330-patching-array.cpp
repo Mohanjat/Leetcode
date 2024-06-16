@@ -2,11 +2,12 @@ class Solution {
 public:
     int minPatches(vector<int>& nums, int n) {
         
+        
+        //time complexity -- max(nums.size(), log(n));
+        
         long long maxReach = 0;
         int patch = 0;
         int i=0;
-        
-    
         
         while(maxReach < n){
             //simple si baat h 
@@ -18,6 +19,7 @@ public:
             }
             else{
                 //need to add patch
+                //patch = maxReach+1
                 maxReach += maxReach+1;
                 patch++;
             }
