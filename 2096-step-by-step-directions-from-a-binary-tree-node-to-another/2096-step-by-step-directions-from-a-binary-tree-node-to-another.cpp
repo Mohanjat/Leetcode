@@ -53,24 +53,54 @@ public:
      }
     
     string getDirections(TreeNode* root, int startValue, int destValue){
-        TreeNode* lca = LCA(root,startValue,destValue);
+        
+        //appraoch 2 -- without using lca only find path root to start and 
+        // root to dest and compare both
         
         string lcaToS = "";
         string lcaToD = "";
         
-        findPath(lca,startValue,lcaToS);
-        findPath(lca,destValue,lcaToD);
+        findPath(root,startValue,lcaToS);
+        findPath(root,destValue,lcaToD);
         
-        int len = lcaToS.length();
-        cout<<len<<endl;
-        std::string result = "";
+        //now remove the common parth of the both strings
         
-        for(int i=0; i<len; i++){
+        int l = 0;
+        
+        while(l<lcaToS.length() && l<lcaToD.length() && lcaToS[l] == lcaToD[l]){
+            l++;
+        }
+        
+        string result = "";
+        
+        for(int i=0; i<lcaToS.length()-l; i++){
             result.push_back('U');
         }
         
-        result = result + lcaToD;
+        for(int i=l; i<lcaToD.length(); i++){
+            result.push_back(lcaToD[i]);
+        }
         
         return result;
+        
+//         TreeNode* lca = LCA(root,startValue,destValue);
+        
+//         string lcaToS = "";
+//         string lcaToD = "";
+        
+//         findPath(lca,startValue,lcaToS);
+//         findPath(lca,destValue,lcaToD);
+        
+//         int len = lcaToS.length();
+//         cout<<len<<endl;
+//         std::string result = "";
+        
+//         for(int i=0; i<len; i++){
+//             result.push_back('U');
+//         }
+        
+//         result = result + lcaToD;
+        
+//         return result;
     }
 };
