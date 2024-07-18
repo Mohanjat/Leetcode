@@ -36,6 +36,9 @@ public:
         //step1 -- make an undirected graph and store all the leaf nodes
         //step2 -- calculate shortest distance of all <= distance
         
+        
+        //time complexity == o(n^2)
+        
         //make undirected graph first
         unordered_map<TreeNode*,vector<TreeNode*>> graph;
         
